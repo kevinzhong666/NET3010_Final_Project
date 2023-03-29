@@ -58,4 +58,25 @@
     </p>
     <p>Copyright © 2023 Weather Hub</p>
   </footer>
+  <script>
+      function getWeather() 
+      {
+        const location = document.getElementById("location").value;
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid={YOUR_API_KEY}&units=metric`;
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => 
+          {
+            const temperature = data.main.temp;
+            const description = data.weather[0].description;
+            const result = `The temperature in ${location} is ${temperature}°C and ${description}.`;
+            document.getElementById("result").textContent = result;
+          })
+          .catch((error) => 
+          {
+            const result = `Unable to get weather for ${location}.`;
+            document.getElementById("result").textContent = result;
+          });
+      }
+    </script>
 </html>
