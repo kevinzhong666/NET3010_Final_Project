@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name = "date" content = "2023-03-28">
+    <title>Sign Up</title>
+  </head>
+
+<header>
+<div style="height: 200px; width: 100%;">
+    <img src="peakbanner.jpg" alt="Banner Image" style="width:100%; height: 100%;">
+</div>
+
+<h1 class="text">Peak Gaming Academy</h1>
+
+</header>
+<nav>
+    <ul>
+        <li><a href="#aboutus">About Us</a></li>
+        <li class="dropdown">
+            <a href="#">Weather</a>
+            <div class="dropdown-content">
+                <a href="index.html#result">Hourly</a>
+                <a href="index.html#result">Daily</a>
+                <a href="index.html#result">Weekly*</a>
+                <a href="index.html#location">Find my Location</a>
+            </div>
+        </li>
+        <li><a href="underconstruction.html">Unique Quotes*</a></li>
+        <li><a href="underconstruction.html">Horoscopes*</a></li>
+        <li><a href="https://cbc.ca/news">News*</a></li>
+        <li class="dropdown">
+            <a href="#">Account</a>
+            <div class="dropdown-content">
+                <a href="login.html">Login</a>
+                <a href="signup.html">Sign Up</a>
+                <a href="login.html">Administration</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+<body>
+    <h2 class="text">Create a Peak Account</h2>
+
+    <form id="signup" onsubmit="return validateForm()">
+        <div>
+            <label for="name">Full Name</label>
+            <br>
+            <input type="text" id="name" name="name" placeholder="Your Name Here">
+        </div>
+    
+        <div>
+            <label for="email">Email</label>
+            <br>
+            <input type="email" id="email" name="email" placeholder="example@email.com">
+        </div>
+    
+        <div>
+            <label for="gamertag">Online Username (Gamertag)</label>
+            <br>
+            <input type="text" id="gamertag" name="gamertag" placeholder="Gamertag"> 
+        </div>
+        <div>
+            <p>How'd you hear about us?</p>
+            <input type="radio" id="social-media" name="referral-source" value="social-media">
+            <label for="social-media">Social Media</label>
+            <br>
+            <input type="radio" id="advertising" name="referral-source" value="advertising">
+            <label for="advertising">Advertising</label>
+            <br>
+            <input type="radio" id="word-of-mouth" name="referral-source" value="word-of-mouth">
+            <label for="friendfamily">Friend/Family</label>
+            <br>
+            <input type="radio" id="internet-search" name="referral-source" value="internet-search">
+            <label for="internet-search">Internet Search</label>
+            <br>
+            <input type="radio" id="other" name="referral-source" value="other">
+            <label for="other">Other</label>
+            <br>
+            <input type="text" id="other-input" name="other-input" placeholder="Please specify">
+        </div>
+    
+        <button type="submit">Sign up</button>
+    </form>
+    
+    <script>
+        // Get the radio button and text input elements
+        var referredBy = document.getElementById("other"); // Multiple choice style selection
+        var referredByOther = document.getElementById("other-input"); // Text based answer
+    
+        // Set the referredByOther input to be hidden by default
+        referredByOther.style.display = "none";
+    
+        // Add an event listener to the radio button group
+        referredBy.addEventListener("change", function() 
+        {
+            // If the "Other" option is selected, show the text input
+            if (referredBy.checked) 
+            {
+                referredByOther.style.display = "block"; // Show text box when other is checked
+            } 
+            else 
+            {
+                referredByOther.style.display = "none"; // Hide the text box if other is not checked
+                referredByOther.value = ""; // clear the input field when not required
+            }
+        });
+
+        function validateForm() 
+        {
+            var form = document.getElementById("signup"); // Get form. Set it to var form
+            var inputs = form.getElementsByTagName("input"); // Get text input. Set it to var input
+
+            for (var i = 0; i < inputs.length; i++) // increment through the text boxes. (looking for characters)
+            {
+                if (inputs[i].type == "text" && inputs[i].value == "") // If a textbox contains nothing
+                {
+                alert("Please fill out all text boxes.");
+                return false;
+                }
+            }
+
+            return true;
+        }
+
+    </script>
+</body>
+
+<footer>
+
+    <h4 class="disclaimer">Disclaimer</h4>
+    <p class="disclaimer">
+        Disclaimer: The images contained on this webpage are not owned or licensed by the owners of this website. They are provided solely for informational and demonstration purposes and are intended to showcase the weather. 
+        The owner of this website makes no claim to the ownership or legality of these images and will remove any content upon request by the rightful owner.
+    </p>
+    <p>Copyright © 2023 Weather Hub</p>
+  </footer>
+</html>
