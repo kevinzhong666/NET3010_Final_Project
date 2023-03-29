@@ -2,7 +2,7 @@ Proposal for Web Development Final Project: Weather App
 
 Introduction:
 
-Our team of five members, consisting of Adeeb Fahim, Olivia Taylor, Ethan Franks, Tarnvir Hans, and Zhenhong Zhong, is proposing a full-stack web application for the final project. Our proposed project is a Weather App that aims to provide accurate and up-to-date weather information to users. Additionally, the app will have other features such as news, horoscopes, account registration, and more. The app will be designed to be user-friendly, interactive, and visually appealing to attract and retain users.
+Our team of five members, consisting of Adeeb Fahim, Olivia Taylor, Ethan Franks, Tarnvir Hans, and Zhenhong(Kevin) Zhong, is proposing a full-stack web application for the final project. Our proposed project is a Weather App that aims to provide accurate and up-to-date weather information to users. Additionally, the app will have other features such as news, horoscopes, account registration, and more. The app will be designed to be user-friendly, interactive, and visually appealing to attract and retain users.
 
 Team Structure:
 
