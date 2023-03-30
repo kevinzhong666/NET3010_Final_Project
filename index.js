@@ -3,7 +3,8 @@ const weatherBox = document.querySelector('.weather-box');
 const weatherDetails = document.querySelector('.weather-details');
 const error404 = document.querySelector('.not-found');
 
-const search = document.querySelector('.search-box button').addEventListener('click', () => {
+const search = document.querySelector('.search-box button').addEventListener('click', () => 
+{
 
     // the API key we using 
     const APIKey = '8a01001e0905088ca0be118718d9570a';
@@ -15,9 +16,11 @@ const search = document.querySelector('.search-box button').addEventListener('cl
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`;
     fetch(url)
         .then(response => response.json())
-        .then(json => {
+        .then(json => 
+            {
 
-            if (json.cod === '404') {
+            if (json.cod === '404') 
+            {
                 // maybe design a page with 404 not found etc...
                 return;
             }
@@ -28,7 +31,8 @@ const search = document.querySelector('.search-box button').addEventListener('cl
             const humidity = document.querySelector('.weather-details .humidity span');
             const wind = document.querySelector('.weather-details .wind span');
 
-            switch (json.weather[0].main) {
+            switch (json.weather[0].main) 
+            {
                 case 'Clear':
                     image.src = 'images/clear.png';
                     break;
