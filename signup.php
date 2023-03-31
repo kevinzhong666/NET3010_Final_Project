@@ -8,19 +8,19 @@
         <div>
             <label for="fname">Full Name</label>
             <br>
-            <input type="text" id="name" name="fname" placeholder="Your First Name Here">
+            <input type="text" id="fname" name="fname" placeholder="Your First Name Here">
         </div>
 
         <div>
             <label for="lname">Full Name</label>
             <br>
-            <input type="text" id="name" name="lname" placeholder="Your Last Name Here">
+            <input type="text" id="lname" name="lname" placeholder="Your Last Name Here">
         </div>
 
         <div>
             <label for="pname">Preferred Name</label>
             <br>
-            <input type="text" id="name" name="pname" placeholder="Your Name Here">
+            <input type="text" id="pname" name="pname" placeholder="Your Name Here">
         </div>
     
         <div>
@@ -30,15 +30,15 @@
         </div>
 
         <div>
-            <label for="password">Password</label>
+            <label for="password1">Password</label>
             <br>
-            <input type="text" id="password" name="password" placeholder="Password123!">
+            <input type="text" id="password1" name="password1" placeholder="Password123!">
         </div>
 
         <div>
-            <label for="password">Confirm Password</label>
+            <label for="password2">Confirm Password</label>
             <br>
-            <input type="text" id="password" name="password" placeholder="Confirm Password">
+            <input type="text" id="password2" name="password2" placeholder="Confirm Password">
         </div>
     
         <div>
@@ -230,16 +230,13 @@
             }
         });
 
-        function validateForm() 
-        {
+        function validateForm() {
             var form = document.getElementById("signup"); // Get form. Set it to var form
-            var inputs = form.getElementsByTagName("input"); // Get text input. Set it to var input
+            var inputs = form.getElementsByTagName("input"); // Get all input fields
 
-            for (var i = 0; i < inputs.length; i++) // increment through the text boxes. (looking for characters)
-            {
-                if (inputs[i].type == "text" && inputs[i].value == "") // If a textbox contains nothing
-                {
-                alert("Please fill out all text boxes.");
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].hasAttribute("required") && inputs[i].value == "") {
+                alert("Please fill out all required fields.");
                 return false;
                 }
             }
