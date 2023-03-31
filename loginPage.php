@@ -59,8 +59,9 @@
             <br>
             <input type="text" id="password" name="password" placeholder="Password">
         </div>
-    
-        <button type="submit">Login</button>
+    <!-- connect the php database here -->
+        <button type="submit"> <?php
+        ?></button> 
     </form>
     
 </body>
