@@ -4,7 +4,7 @@
 <?php include ('header.php'); ?>
 <?php include ('nav.php'); ?>
     <h2>Sign in to your Weather Hub Account</h2>
-
+    
     <form id="signup" onsubmit="return validateForm()">
         <div>
             <label for="email">Email Address</label>
@@ -17,9 +17,8 @@
             <br>
             <input type="text" id="password" name="password" placeholder="Password">
         </div>
-    <!-- connect the php database here -->
-        <button type="submit"> <?php
-        ?></button> 
+    
+        <button type="submit">Login</button>
     </form>
     
 </body>

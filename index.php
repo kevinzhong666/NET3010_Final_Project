@@ -14,41 +14,9 @@
   </head>
 
   <body>
-    <header>
-      <div style="height: 200px; width: 100%;">
-          <img src="cloudBanner.jpg" alt="Banner Image" style="width:100%; height: 100%;">
-      </div>
-      
-      <h1 class="text">Weather Hub</h1>
-      
-      <h2 class="text">Forecasting Your Future</h2>
-    </header>
+  <?php include ('header.php'); ?>
 
-    <nav>
-      <ul>
-        <li><a href="#aboutus">About Us</a></li>
-        <li class="dropdown">
-          <a href="#">Weather</a>
-          <div class="dropdown-content">
-            <a href="index.html#result">Hourly</a>
-            <a href="index.html#result">Daily</a>
-            <a href="index.html#result">Weekly*</a>
-            <a href="index.html#location">Find my Location</a>
-          </div>
-        </li>
-        <li><a href="underconstruction.html">Unique Quotes*</a></li>
-        <li><a href="underconstruction.html">Horoscopes*</a></li>
-        <li><a href="https://cbc.ca/news">News*</a></li>
-        <li class="dropdown">
-          <a href="#">Account</a>
-          <div class="dropdown-content">
-            <a href="login.html">Login</a>
-            <a href="signup.html">Sign Up</a>
-            <a href="login.html">Administration</a>
-          </div>
-        </li>
-      </ul>
-    </nav>
+  <?php include ('nav.php'); ?>
 
     <h1> Your Weather, John.</h1>
 
@@ -95,13 +63,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="index.js"></script>
-    <footer>
-      <h4 class="disclaimer">Disclaimer</h4>
-      <p class="disclaimer">
-          Disclaimer: The images contained on this webpage are not owned or licensed by the owners of this website. They are provided solely for informational and demonstration purposes and are intended to showcase the weather. 
-          The owner of this website makes no claim to the ownership or legality of these images and will remove any content upon request by the rightful owner.
-      </p>
-      <p>Copyright © 2023 Weather Hub</p>
-    </footer>
+    <?php include ('footer.php'); ?>
   </body>
 </html>
