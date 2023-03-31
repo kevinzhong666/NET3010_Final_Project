@@ -18,8 +18,9 @@
             <input type="text" id="password" name="password" placeholder="Password">
         </div>
     <!-- connect the php database here -->
+        <br>
         <button type="submit"> <?php
-        ?></button> 
+        ?>Login</button> 
     </form>
     
 </body>
