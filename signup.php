@@ -6,13 +6,17 @@
 
     <form id="signup" onsubmit="return validateForm()">
         <div>
-            <label for="fname">Full Name</label>
+            <p>Required Information</p>
+        </div>
+
+        <div>
+            <label for="fname">First Name</label>
             <br>
             <input type="text" id="fname" name="fname" placeholder="Your First Name Here">
         </div>
 
         <div>
-            <label for="lname">Full Name</label>
+            <label for="lname">Last Name</label>
             <br>
             <input type="text" id="lname" name="lname" placeholder="Your Last Name Here">
         </div>
@@ -174,6 +178,7 @@
 
         <div>
             <p>Optional</p>
+            <br>
             <p>How'd you hear about us?</p>
             <input type="radio" id="social-media" name="referral-source" value="social-media">
             <label for="social-media">Social Media</label>
@@ -230,19 +235,39 @@
             }
         });
 
-        function validateForm() {
+        // Will use if we are allowed to use mandatory/required attributes
+
+        /*function validateForm() {
             var form = document.getElementById("signup"); // Get form. Set it to var form
             var inputs = form.getElementsByTagName("input"); // Get all input fields
 
-            for (var i = 0; i < inputs.length; i++) {
-                if (inputs[i].hasAttribute("required") && inputs[i].value == "") {
+            for (var i = 0; i < inputs.length; i++) 
+            {
+                if (inputs[i].hasAttribute("required") && inputs[i].value == "") 
+                {
                 alert("Please fill out all required fields.");
                 return false;
                 }
             }
 
             return true;
+        }*/
+
+        function validateForm() 
+        {
+            var form = document.getElementById("signup"); // Get form. Set it to var form
+            var inputs = form.getElementsByTagName("input"); // Get all input fields
+
+            for (var i = 0; i < inputs.length; i++) // increment through the text boxes. (looking for characters)
+            {
+                if (inputs[i].type == "text" && inputs[i].value == "") // If a textbox contains nothing, remind the user to fill it out
+                {
+                alert("Please fill out all text boxes.");
+                }
+            }
+            return true;
         }
+        
 
     </script>
     <?php include ('footer.php'); ?>
