@@ -34,23 +34,23 @@ const search = document.querySelector('.search-box button').addEventListener('cl
             switch (json.weather[0].main) 
             {
                 case 'Clear':
-                    image.src = 'images/clear.png';
+                    image.src = 'images/sunny.jpg';
                     break;
 
                 case 'Rain':
-                    image.src = 'images/rain.png';
+                    image.src = 'images/rainy.jpg';
                     break;
 
                 case 'Snow':
-                    image.src = 'images/snow.jpg';
+                    image.src = 'images/snowy.jpg';
                     break;
 
                 case 'Clouds':
-                    image.src = 'images/cloud.png';
+                    image.src = 'images/cloudy.jpg';
                     break;
 
                 case 'Haze':
-                    image.src = 'images/mist.png';
+                    image.src = 'images/haze.jpg';
                     break;
 
                 default:
