@@ -1,3 +1,36 @@
+<?php
+   $servername = "localhost";
+   $username = "username";
+   $password = "password";
+   $database = "user_database";
+
+   // Create connection
+   $conn = mysqli_connect($servername, $username, $password, $database);
+
+   // Check connection
+   if (!$conn) {
+       die("Connection failed: " . mysqli_connect_error());
+   }
+
+   $first_name = $_POST['first_name'];
+   $last_name = $_POST['last_name'];
+   $preferred_name = $_POST['preferred_name'];
+   $email = $_POST['email'];
+   $password = $_POST['password'];
+   $date_of_birth = $_POST['date_of_birth'];
+
+   $sql = "INSERT INTO users (first_name, last_name, preferred_name, email, password, date_of_birth) 
+   VALUES ('$first_name', '$last_name', '$preferred_name', '$email', '$password', '$date_of_birth')";
+
+   if (mysqli_query($conn, $sql)) {
+       echo "New record created successfully";
+   } else {
+       echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+   }
+
+   mysqli_close($conn);
+?>
+
 <?php include ('head.php'); ?>
 <body>
 <?php include ('header.php'); ?>
