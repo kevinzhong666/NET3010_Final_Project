@@ -1,34 +1,37 @@
 <?php
-   $servername = "localhost";
-   $username = "username";
-   $password = "password";
-   $database = "user_database";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$db="user_DB";
+$dbname = "CREATE DATABASE IF NOT EXISTS user_DB";
 
-   // Create connection
-   $conn = mysqli_connect($servername, $username, $password, $database);
+// Creating a connection
+$conn = new mysqli($servername, $username, $password, $db);
 
-   // Check connection
-   if (!$conn) {
-       die("Connection failed: " . mysqli_connect_error());
-   }
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
 
-   $first_name = $_POST['first_name'];
-   $last_name = $_POST['last_name'];
-   $preferred_name = $_POST['preferred_name'];
-   $email = $_POST['email'];
-   $password = $_POST['password'];
-   $date_of_birth = $_POST['date_of_birth'];
 
-   $sql = "INSERT INTO users (first_name, last_name, preferred_name, email, password, date_of_birth) 
-   VALUES ('$first_name', '$last_name', '$preferred_name', '$email', '$password', '$date_of_birth')";
+// Creating a database named user_DB
+if (mysqli_query($conn, $dbname)) {
+    echo "Database created successfully";
+  } else {
+    $dbname = "CREATE DATABASE user_DB";
+  }
 
-   if (mysqli_query($conn, $sql)) {
-       echo "New record created successfully";
-   } else {
-       echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-   }
+ //create table in database named users
+//somehow create the table that will hold info
 
-   mysqli_close($conn);
+//make variables that will hold info 
+
+//maybe insert some default info
+
+//make a check to see if info was added
+
+// closing connection
+$conn->close();
 ?>
 
 <?php include ('head.php'); ?>
