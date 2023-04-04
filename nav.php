@@ -1,6 +1,6 @@
 <nav>
       <ul>
-        <li><a href="#aboutus">About Us</a></li>
+        <li><a href="aboutus.php">About Us</a></li>
         <li class="dropdown">
           <a href="#">Weather</a>
           <div class="dropdown-content">
@@ -10,8 +10,8 @@
             <a href="index.php#location">Find my Location</a>
           </div>
         </li>
-        <li><a href="underconstruction.php">Unique Quotes*</a></li>
-        <li><a href="underconstruction.php">Horoscopes*</a></li>
+        <li><a href="signup.php">Remove Ads</a></li>
+        <li><a href="ourteam.php">Our Team</a></li>
         <li><a href="https://cbc.ca/news">News*</a></li>
         <li class="dropdown">
           <a href="#">Account</a>
