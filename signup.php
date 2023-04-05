@@ -1,47 +1,36 @@
 <?php
-// Start the session
-session_start();
-
-// Set up database connection
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "user_DB";
+$db="user_DB";
+$dbname = "CREATE DATABASE IF NOT EXISTS user_DB";
 
-// Create connection to SQL 
-$conn = new mysqli($servername, $username, $password);
+// Creating a connection
+$conn = new mysqli($servername, $username, $password, $db);
 
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-// Create database if it doesn't exist
-$db_query = "CREATE DATABASE IF NOT EXISTS " . $dbname;
 
-//check for creation of database
-if ($conn->query($db_query) === FALSE) {
-    echo "Error creating database: " . $conn->error . "<br>";
-} 
+// Creating a database named user_DB
+if (mysqli_query($conn, $dbname)) {
+    echo "Database created successfully";
+  } else {
+    $dbname = "CREATE DATABASE user_DB";
+  }
 
-//create connection to database
-$conn = new mysqli($servername, $username, $password, $dbname);
+ //create table in database named users
+//somehow create the table that will hold info
 
-// Create table to store user information
-$table_query = "CREATE TABLE IF NOT EXISTS users (
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30) NOT NULL,
-    email VARCHAR(50) NOT NULL, 
-    password VARCHAR(255) NOT NULL,
-    dob DATE NOT NULL
-)";
+//make variables that will hold info 
 
-//check for creation of table 
-if ($conn->query($table_query) === False) {
-    echo "Error creating table: " . $conn->error . "<br>";
-} 
+//maybe insert some default info
 
+//make a check to see if info was added
 
+// closing connection
 $conn->close();
 ?>
 
