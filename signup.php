@@ -1,28 +1,31 @@
 <?php
+// Start the session
+session_start();
+
+// Set up database connection
 $servername = "localhost";
 $username = "root";
 $password = "";
-$db="user_DB";
-$dbname = "CREATE DATABASE IF NOT EXISTS user_DB";
+$dbname = "user_DB";
 
-// Creating a connection
-$conn = new mysqli($servername, $username, $password, $db);
+// Create connection to SQL 
+$conn = new mysqli($servername, $username, $password);
 
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
+// Create database if it doesn't exist
+$db_query = "CREATE DATABASE IF NOT EXISTS " . $dbname;
 
-// Creating a database named user_DB
-if (mysqli_query($conn, $dbname)) {
-    echo "Database created successfully";
-  } else {
-    $dbname = "CREATE DATABASE user_DB";
-  }
+//check for creation of database
+if ($conn->query($db_query) === FALSE) {
+    echo "Error creating database: " . $conn->error . "<br>";
+} 
 
- //create table in database named users
-//somehow create the table that will hold info
+//create connection to database
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Create table to store user information
 $table_query = "CREATE TABLE IF NOT EXISTS users (
@@ -41,9 +44,24 @@ if ($conn->query($table_query) === False) {
     echo "Error creating table: " . $conn->error . "<br>";
 } 
 
-//make a check to see if info was added
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["Sign_up"])) {
+    $firstname = $_POST["fname"];
+    $lastname = $_POST["lname"];
+    $preferred = $_POST["pname"];
+    $email = $_POST["email"];
+    $password = $_POST["password1"];
+    $dob = $_POST["dob_year"]  . '-' . $_POST["dob_month"]  . '-' . $_POST["dob"];    
+    $insert_query = "INSERT INTO users (firstname, lastname, preferred, email, password, dob)
+    VALUES ('$firstname', '$lastname', '$preferred', '$email', '$password', '$dob')";
 
-// closing connection
+    if ($conn->query($insert_query) === TRUE) {
+        header("Location: index.php");
+        exit();
+    } else {
+        echo "Error: " . $insert_query . "<br>" . $conn->error;
+    }
+}
+
 $conn->close();
 ?>
 
@@ -55,7 +73,7 @@ $conn->close();
 
 
     
-    <form method = "post" action= '' id="signup">
+    <form method = "post" action= '' id="signup" onsubmit="return validateForm()">
         <div>
             <p>Required Information</p>
         </div>
@@ -253,18 +271,15 @@ $conn->close();
             <br>
         </div>
 
-        
-    
-        <input type="submit" name="Sign up" value = "submit">
+        <input type="submit" name="Sign_up" value = "Sign Up">
         <p>By clicking submit, you agree to our <a href="tos.php">Terms of Service</a>. <br>
             You also give your consent to recieving email updates and newsletters from WeatherHub as we do not wish to take your money.</p>
     </form>
     <?php
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") 
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["Sign_up"])) 
     {
-        
         $firstname = $_POST["fname"];
         $lastname = $_POST["lname"];
         $preferred = $_POST["pname"];
@@ -316,7 +331,6 @@ $conn->close();
         /*function validateForm() {
             var form = document.getElementById("signup"); // Get form. Set it to var form
             var inputs = form.getElementsByTagName("input"); // Get all input fields
-
             for (var i = 0; i < inputs.length; i++) 
             {
                 if (inputs[i].hasAttribute("required") && inputs[i].value == "") 
@@ -325,23 +339,40 @@ $conn->close();
                 return false;
                 }
             }
-
             return true;
         }*/
 
-        function validateForm() 
-        {
-            var form = document.getElementById("signup"); // Get form. Set it to var form
-            var inputs = form.getElementsByTagName("input"); // Get all input fields
+        function validateForm() {
+            var form = document.getElementById("signup");
+            var inputsToCheck = ["username", "email", "password1", "password2"]; // List the input field IDs you want to validate
+            var valid = true;
 
-            for (var i = 0; i < inputs.length; i++) // increment through the text boxes. (looking for characters)
-            {
-                if (inputs[i].type == "text" && inputs[i].value == "") // If a textbox contains nothing, remind the user to fill it out
-                {
-                alert("Please fill out all text boxes.");
+            for (var i = 0; i < inputsToCheck.length; i++) {
+                var input = document.getElementById(inputsToCheck[i]);
+                if (input.value.trim() == "") {
+                    alert("Please fill out all required fields.");
+                    valid = false;
+                    break;
                 }
             }
-            return true;
+
+            var password1 = document.getElementById("password1").value;
+            var password2 = document.getElementById("password2").value;
+
+            if (valid && password1 !== password2) {
+                alert("Passwords do not match.");
+                valid = false;
+            }
+
+             // Check if the email is valid
+            var email = document.getElementById("email").value;
+            var emailValidation = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+            if (!emailValidation.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            return valid;
         }
         
 
