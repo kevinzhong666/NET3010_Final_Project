@@ -219,11 +219,14 @@ $conn->close();
         </div>
 
         <div>
+            <label>What kind of quotes do you want to see on your page?:</label><br>
+            <input type="radio" id="funny" name="quotes" value="funny">
+            <label for="funny">Funny</label><br>
+            <input type="radio" id="inspirationaal" name="quotes" value="inspirationaal">
+            <label for="inspirationaal">Inspirationaal</label><br>
+            <input type="radio" id="bible" name="quotes" value="bible">
+            <label for="bible">Bible</label>
             <br>
-            <label for="postal">Postal Code (For Local Weather)</label>
-            <br>
-            <input type="text" id="postal" name="postal" placeholder="H0H 0H0">
-            <br> 
         </div>
         
 
@@ -247,25 +250,20 @@ $conn->close();
             <label for="other">Other</label>
             <br>
             <input type="text" id="other-input" name="other-input" placeholder="Please specify">
-        </div>
-
-        <div>
-            <label>Gender:</label><br>
-            <input type="radio" id="male" name="gender" value="male">
-            <label for="male">Male</label><br>
-            <input type="radio" id="female" name="gender" value="female">
-            <label for="female">Female</label><br>
-            <input type="radio" id="other" name="gender" value="other">
-            <label for="other">Other</label>
             <br>
         </div>
+
+        
     
-        <input type="submit" name="Sign up" value = "mybutton">
+        <input type="submit" name="Sign up" value = "submit">
+        <p>By clicking submit, you agree to our <a href="tos.php">Terms of Service</a>. <br>
+            You also give your consent to recieving email updates and newsletters from WeatherHub as we do not wish to take your money.</p>
     </form>
     <?php
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") 
+    {
         
         $firstname = $_POST["fname"];
         $lastname = $_POST["lname"];
@@ -276,9 +274,12 @@ $conn->close();
         $insert_query = "INSERT INTO users (firstname, lastname, preferred, email, password, dob)
         VALUES ('$firstname', '$lastname', '$preferred', '$email', '$password', '$dob')";
     
-        if ($conn->query($insert_query) === TRUE) {
+        if ($conn->query($insert_query) === TRUE) 
+        {
             echo "New record created successfully";
-        } else {
+        } 
+        else 
+        {
             echo "Error: " . $insert_query . "<br>" . $conn->error;
         }
     }
