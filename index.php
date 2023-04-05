@@ -1,17 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Weather Hub</title>
-  </head>
+<?php 
+session_start(); // start the session 
+// check if the user clicked the logout button
+if (isset($_POST['logout'])) 
+{
+    // destroy the session and unset session variables
+    session_unset();
+    session_destroy();
 
-  <body>
+    // redirect to the home page
+    header('Location: index.php');
+    exit();
+}
+?>
+
+<?php include("head.php"); ?>
+<body>
   <div class="wrapper">
-  <?php include ('header.php'); ?>
-    <?php include ('nav.php'); ?>
+  <?php include("header.php"); ?>
+    <?php include("nav.php"); ?>
+
+    <section id="loggedIn">
+        <?php if (isset($_SESSION['username'])): ?>
+            <h3>Welcome, <?php echo $_SESSION['username']; ?>!</h3>
+
+            <form method="post" action="">
+                <input type="submit" name="logout" value="Log out">
+            </form> 
+
+        <?php else: ?>
+            <h2>Welcome to our website!</h2>
+            <p>Please <a href="login.php">log in</a> to access your account.</p>
+        <?php endif; ?>
 
     <h1>Your Weather, John.</h1>
 

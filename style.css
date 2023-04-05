@@ -367,5 +367,10 @@
             right: 0;
             background-image: url('./images/ad2.jpg');
         }
+
+        p .loggedIn, h3 .loggedIn
+        {
+            text-align: right;
+        }
     }
 }
