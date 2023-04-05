@@ -80,7 +80,7 @@
             display: block;
         }
 
-        h1, h2
+        h1, h2,h4
         {
         color:black;
         text-align: center;
@@ -91,11 +91,6 @@
         color: black;
         padding: 5px 10px 5px 10px;
         } 
-
-        h4
-        {
-        color:black;
-        }
 
         p
         {
@@ -162,7 +157,7 @@
             transition: 0.6s ease-out;
         }
         
-        .search-box
+        .search-bar
         {
             width: 100%;
             height: min-content;
@@ -171,27 +166,27 @@
             justify-content: space-between;
         }
         
-        .search-box input
+        .search-bar input
         {
             color: #06283D;
             width: 80%;
+            height: 40px;
             font-size: 24px;
             font-weight: 500;
-            text-transform: uppercase;
             padding-left: 32px;
             background-color: #ffffff99;
             border-color: rgba(6, 40, 61, 0.49);
+            border-radius: 8px;;
         }
         
-        .search-box input::placeholder
+        .search-bar input::placeholder
         {
             font-size: 20px;
             font-weight: 500;
             color: #06283D;
-            text-transform: capitalize;
         }
         
-        .search-box button
+        .search-bar button
         {
             cursor: pointer;
             width: 50px;
@@ -201,16 +196,17 @@
             border-radius: 50%;
             font-size: 22px;
             transition: 0.4s ease;
+            margin-left:8px;
         }
         
-        .search-box button:hover
+        .search-bar button:hover
         {
             color: #fff;
             background: #06283D;
             cursor: pointer;
         }
         
-        .search-box i
+        .search-bar i
         {
             position: absolute;
             color: #06283D;
@@ -218,18 +214,18 @@
             padding-left: 5px;
         }
         
-        .weather-box
+        .weather-info
         {
             text-align: center;
         }
         
-        .weather-box img
+        .weather-info img
         {
             width: 60%;
             margin-top: 30px;
         }
         
-        .weather-box .temperature
+        .weather-info .temperature
         {
             position: relative;
             color: #06283D;
@@ -239,14 +235,14 @@
             margin-left: -16px;
         }
         
-        .weather-box .temperature span
+        .weather-info .temperature span
         {
             position: absolute;
             margin-left: 4px;
             font-size: 1.5rem;
         }
         
-        .weather-box .description
+        .weather-info .description
         {
             color: #06283D;
             font-size: 22px;
@@ -295,13 +291,14 @@
             color: #06283D;
             font-size: 22px;
             font-weight: 500;
+            text-align: center;
         }
         
         .weather-details p
         {
             color: #06283D;
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 18px;
+            font-weight: 800;
         }
         
         .not-found
@@ -327,7 +324,7 @@
             margin-top: 12px;
         }
         
-        .weather-box, .weather-details
+        .weather-info, .weather-details
         {
             scale: 0;
             opacity: 0;
@@ -346,6 +343,34 @@
                 scale: 1;
                 opacity: 1;
             }
+        }
+
+        .ad-column-left, .ad-column-right 
+        {
+            position: fixed;
+            top: 40%;
+            width: auto;
+            height: auto;
+            background-size: auto;
+            background-repeat: no-repeat;
+        }
+          
+        .ad-column-left 
+        {
+            left: 0;
+            background-image: url('./images/ad3.jpg');
+
+        }
+        
+        .ad-column-right 
+        {
+            right: 0;
+            background-image: url('./images/ad2.jpg');
+        }
+
+        p .loggedIn, h3 .loggedIn
+        {
+            text-align: right;
         }
     }
 }
