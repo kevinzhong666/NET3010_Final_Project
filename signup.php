@@ -1,3 +1,47 @@
+<?php
+// Start the session
+session_start();
+
+// Set up database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "user_DB";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+// Create database if it doesn't exist
+$db_query = "CREATE DATABASE IF NOT EXISTS " . $dbname;
+
+if ($conn->query($db_query) === TRUE) {
+    echo "Database created successfully<br>";
+} else {
+    echo "Error creating database: " . $conn->error . "<br>";
+}
+
+// Create table to store user information
+$table_query = "CREATE TABLE IF NOT EXISTS users (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    dob DATE NOT NULL
+)";
+
+if ($conn->query($table_query) === TRUE) {
+    echo "Table created successfully<br>";
+} else {
+    echo "Error creating table: " . $conn->error . "<br>";
+}
+$conn->close();
+?>
+
 <?php include ('head.php'); ?>
 <body>
 <?php include ('header.php'); ?>
