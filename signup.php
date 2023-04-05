@@ -24,9 +24,22 @@ if (mysqli_query($conn, $dbname)) {
  //create table in database named users
 //somehow create the table that will hold info
 
-//make variables that will hold info 
+// Create table to store user information
+$table_query = "CREATE TABLE IF NOT EXISTS users (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    firstname VARCHAR(30) NOT NULL,
+    lastname VARCHAR(30) NOT NULL,
+    preferred VARCHAR(30) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    dob DATE NOT NULL
+)";
 
-//maybe insert some default info
+
+//check for creation of table 
+if ($conn->query($table_query) === False) {
+    echo "Error creating table: " . $conn->error . "<br>";
+} 
 
 //make a check to see if info was added
 
@@ -40,7 +53,9 @@ $conn->close();
 <?php include ('nav.php'); ?>
     <h2 class="text">Create a Weather Hub Account</h2>
 
-    <form id="signup" onsubmit="return validateForm()">
+
+    
+    <form method = "post" action= '' id="signup">
         <div>
             <p>Required Information</p>
         </div>
@@ -245,14 +260,38 @@ $conn->close();
             <br>
         </div>
     
-        <button type="submit">Sign up</button>
+        <input type="submit" name="Sign up" value = "mybutton">
     </form>
+    <?php
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
+        $firstname = $_POST["fname"];
+        $lastname = $_POST["lname"];
+        $preferred = $_POST["pname"];
+        $email = $_POST["email"];
+        $password = $_POST["password1"];
+        $dob = $_POST["dob_year"]  . $_POST["dob_month"]  . $_POST["dob"];    
+        $insert_query = "INSERT INTO users (firstname, lastname, preferred, email, password, dob)
+        VALUES ('$firstname', '$lastname', '$preferred', '$email', '$password', '$dob')";
+    
+        if ($conn->query($insert_query) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $insert_query . "<br>" . $conn->error;
+        }
+    }
+    $conn->close();
+    ?>
     
     <script>
         // Get the radio button and text input elements
         var referredBy = document.getElementById("other"); // Multiple choice style selection
         var referredByOther = document.getElementById("other-input"); // Text based answer
     
+
+        
         // Set the referredByOther input to be hidden by default
         referredByOther.style.display = "none";
     
