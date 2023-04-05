@@ -9,8 +9,8 @@
   </head>
 
   <body>
-    <?php include ('header.php'); ?>
-
+  <div class="wrapper">
+  <?php include ('header.php'); ?>
     <?php include ('nav.php'); ?>
 
     <h1>Your Weather, John.</h1>
@@ -58,5 +58,15 @@
         </div>
       </div>
     </div>
+    <script
+      src="https://kit.fontawesome.com/7c8801c017.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="index.js"></script>
+    <?php include ('footer.php'); ?>
+    <div class="ad-column-left"></div>
+
+    <div class="ad-column-right"></div>
+  </div>
   </body>
 </html>

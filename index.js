@@ -8,8 +8,6 @@ const description = document.querySelector('.weather-info .description');
 const humidity = document.querySelector('.weather-details .humidity span');
 const wind = document.querySelector('.weather-details .wind span');
 
-
-
 const searchWeather = async () => {
     const city = document.querySelector('.search-bar input').value.trim();
     const APIKey = '8a01001e0905088ca0be118718d9570a';

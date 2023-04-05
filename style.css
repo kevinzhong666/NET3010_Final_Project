@@ -344,5 +344,28 @@
                 opacity: 1;
             }
         }
+
+        .ad-column-left, .ad-column-right 
+        {
+            position: fixed;
+            top: 40%;
+            width: auto;
+            height: auto;
+            background-size: auto;
+            background-repeat: no-repeat;
+        }
+          
+        .ad-column-left 
+        {
+            left: 0;
+            background-image: url('./images/ad3.jpg');
+
+        }
+        
+        .ad-column-right 
+        {
+            right: 0;
+            background-image: url('./images/ad2.jpg');
+        }
     }
 }
