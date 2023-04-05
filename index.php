@@ -9,9 +9,9 @@
   </head>
 
   <body>
-    <!-- ?php include ('header.php'); ? -->
+    <?php include ('header.php'); ?>
 
-    <!-- ?php include ('nav.php'); ?!-->
+    <?php include ('nav.php'); ?>
 
     <h1>Your Weather, John.</h1>
 
@@ -52,7 +52,7 @@
                 crossorigin="anonymous"
               ></script>
               <script src="index.js"></script>
-              <!--?php include ('footer.php'); ?!-->
+              <?php include ('footer.php'); ?>
             </div>
           </div>
         </div>

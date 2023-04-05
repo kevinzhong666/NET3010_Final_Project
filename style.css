@@ -80,7 +80,7 @@
             display: block;
         }
 
-        h1, h2, h4
+        h1, h2,h4
         {
         color:black;
         text-align: center;
@@ -92,16 +92,23 @@
         padding: 5px 10px 5px 10px;
         } 
 
+        p
+        {
+        color:black; 
+        padding: 5px 10px 5px 10px;
+        text-align: center;
+        }
+
         a
         {
             color:darkblue;
         }
 
-        .disclaimer, p
+        .disclaimer
         {
+            font-size: small;
             color:black;
             font-family:'Times New Roman', Times, serif;
-            text-align: center;
         }
 
         #signup label, #signup input, #signup
