@@ -80,7 +80,7 @@
             display: block;
         }
 
-        h1, h2,h4
+        h1, h2
         {
         color:black;
         text-align: center;
@@ -91,6 +91,9 @@
         color: black;
         padding: 5px 10px 5px 10px;
         } 
+        h4{
+            color:black;
+        }
 
         p
         {

@@ -71,7 +71,6 @@ if (isset($_POST['logout']))
                 crossorigin="anonymous"
               ></script>
               <script src="index.js"></script>
-              <?php include ('footer.php'); ?>
             </div>
           </div>
         </div>

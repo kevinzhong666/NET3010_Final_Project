@@ -75,9 +75,16 @@
     }
 
     $ObjData = aztro($sign, $day);
-    echo $ObjData['description'];
+
+    // Check if the "description" key exists in the $ObjData array before trying to access it
+    if (array_key_exists('description', $ObjData)) {
+        echo $ObjData['description'];
+    } else {
+        echo "Error: Could not retrieve horoscope description.";
+    }
 
 ?>
+
     
     <script src="horoscopes.js"></script>
     <?php include ('footer.php'); ?>
