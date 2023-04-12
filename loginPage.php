@@ -5,7 +5,7 @@
 <?php include ('nav.php'); ?>
     <h2>Sign in to your Weather Hub Account</h2>
 
-    <form id="signup" onsubmit="return validateForm()">
+    <form id="signup" onsubmit="return validateForm()" action="login.php" method="POST">
         <div>
             <label for="email">Email Address</label>
             <br>
