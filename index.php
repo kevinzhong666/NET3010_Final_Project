@@ -20,8 +20,8 @@ if (isset($_POST['logout']))
     <?php include("nav.php"); ?>
 
     <section id="loggedIn">
-        <?php if (isset($_SESSION['username'])): ?>
-            <h3>Welcome, <?php echo $_SESSION['username']; ?>!</h3>
+        <?php if (isset($_SESSION['preferred'])): ?>
+            <h3>Welcome, <?php echo $_SESSION['preferred']; ?>!</h3>
 
             <form method="post" action="">
                 <input type="submit" name="logout" value="Log out">
@@ -29,10 +29,10 @@ if (isset($_POST['logout']))
 
         <?php else: ?>
             <h2>Welcome to our website!</h2>
-            <p>Please <a href="login.php">log in</a> to access your account.</p>
+            <p>Please <a href="loginPage.php">log in</a> to access your account.</p>
         <?php endif; ?>
 
-    <h1>Your Weather, John.</h1>
+    <h1>Your Weather, <?php echo isset($_SESSION['preferred']) ? $_SESSION['preferred'] : "Guest"; ?>.</h1>
 
     <div class="container-wrapper">
       <div class="container">
@@ -66,12 +66,6 @@ if (isset($_POST['logout']))
             <div class="text">
               <span></span>
               <p>Wind Speed</p>
-              <script
-                src="https://kit.fontawesome.com/7c8801c017.js"
-                crossorigin="anonymous"
-              ></script>
-              <script src="index.js"></script>
-              <?php include ('footer.php'); ?>
             </div>
           </div>
         </div>
@@ -84,7 +78,6 @@ if (isset($_POST['logout']))
     <script src="index.js"></script>
     <?php include ('footer.php'); ?>
     <div class="ad-column-left"></div>
-
     <div class="ad-column-right"></div>
   </div>
   </body>
