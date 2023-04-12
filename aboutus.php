@@ -4,7 +4,7 @@
         <?php include("nav.php")?>
             <div class="useArea">
                 <table border="0">
-            <!-- my name as the title -->
+            <-- info all about the differences in signed in vs not signed in versions -->
             <h1>What Do We Offer?</h1>
             <br>
             <p>WeatherHub is an innovative and user-friendly weather website designed to provide you with the most 
