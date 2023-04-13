@@ -12,8 +12,7 @@
                                     front-end designer and co-team lead. I created a team google doc where I outlined everything I wanted to be implemented on each page. 
                                     I wrote the informational section on our website and what it has to offer and also wrote and designed the “about our team” section which 
                                     doubles as the contribution breakdown. I have also chosen and uploaded every one of the photographs we have displayed on the website, and 
-                                    gave notes on ways to improve the website's design to the frontend developers along the way.
-                                    You can contact me with any concerns at: </p>
+                                    gave notes on ways to improve the website's design to the frontend developers along the way. </p>
 
                     <li class="emailbullets"> Carleton email: <a href="mailto:oliviataylor@cmail.carleton.ca">oliviataylor@cmail.carleton.ca</a></li>
                     <li class="emailbullets"> Algonquin email: <a href="mailto:tayl0649@algonquinlive.com">tayl0649@algonquinlive.com</a></li> </p>
