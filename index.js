@@ -8,7 +8,8 @@ const description = document.querySelector('.weather-info .description');
 const humidity = document.querySelector('.weather-details .humidity span');
 const wind = document.querySelector('.weather-details .wind span');
 
-const searchWeather = async () => {
+const searchWeather = async () => 
+{
     const city = document.querySelector('.search-bar input').value.trim();
     const APIKey = '8a01001e0905088ca0be118718d9570a';
   
@@ -18,7 +19,8 @@ const searchWeather = async () => {
   
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`;
   
-    try {
+    try 
+    {
       const response = await fetch(url);
       const json = await response.json();
   
@@ -33,7 +35,8 @@ const searchWeather = async () => {
       weatherBox.classList.add('fadeIn');
       weatherDetails.classList.add('fadeIn');
       container.style.height = '590px';
-    } catch (error) {
+    } catch (error) 
+    {
       console.error(error);
     }
   };
