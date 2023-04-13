@@ -2,19 +2,41 @@
 // Start the session
 session_start();
 
+function emailExists($conn, $email) {
+    $email_query = "SELECT email FROM users WHERE email = ? LIMIT 1";
+    $stmt = $conn->prepare($email_query);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
+    $emailExists = $stmt->num_rows > 0;
+    $stmt->close();
+    return $emailExists;
+}
+
 // Set up database connection
 $servername = "localhost";
 $username = "root";
-$db_password = "";
+$password = "";
 $dbname = "user_DB";
 
-// Create connection to SQL 
-$conn = new mysqli($servername, $username, $db_password, $dbname);
+// Create connection to SQL
+$conn = new mysqli($servername, $username, $password);
 
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-} 
+}
+
+// Create database if it doesn't exist
+$db_query = "CREATE DATABASE IF NOT EXISTS " . $dbname;
+
+//check for creation of database
+if ($conn->query($db_query) === FALSE) {
+    echo "Error creating database: " . $conn->error . "<br>";
+}
+
+//create connection to database
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Create table to store user information
 $table_query = "CREATE TABLE IF NOT EXISTS users (
@@ -27,55 +49,52 @@ $table_query = "CREATE TABLE IF NOT EXISTS users (
     dob DATE NOT NULL
 )";
 
-//check for creation of table 
+//check for creation of table
 if ($conn->query($table_query) === False) {
     echo "Error creating table: " . $conn->error . "<br>";
-} 
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["Sign_up"])) {
-    $firstname = $_POST["fname"];
-    $lastname = $_POST["lname"];
-    $preferred = $_POST["pname"];
-    $email = $_POST["email"];
-    $password = $_POST["password1"];
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hash the password
-    $dob = $_POST["dob"];    
-    $insert_query = "INSERT INTO users (firstname, lastname, preferred, email, password, dob)
-    VALUES (?, ?, ?, ?, ?, ?)"; // Use prepared statements to prevent SQL injection
+    $firstname = $conn->real_escape_string($_POST["fname"]);
+    $lastname = $conn->real_escape_string($_POST["lname"]);
+    $preferred = $conn->real_escape_string($_POST["pname"]);
+    $email = $conn->real_escape_string($_POST["email"]);
+    $password = $conn->real_escape_string($_POST["password1"]);
+    $dob = $conn->real_escape_string($_POST["dob"]);
 
-    $stmt = $conn->prepare($insert_query);
-    $stmt->bind_param("ssssss", $firstname, $lastname, $preferred, $email, $hashed_password, $dob);
-    $result = $stmt->execute();
+    if (emailExists($conn, $email)) {
+        echo '<script>document.getElementById("error-message").innerText = "Error: Email already exists.";</script>';    } else {
+        // Hash the password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    if ($result) {
-        // Log in the new user
-        $new_user_id = $stmt->insert_id;
-        $query = "SELECT * FROM users WHERE id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("i", $new_user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $user = $result->fetch_assoc();
-        $_SESSION["user"] = $user;
+        $insert_query = "INSERT INTO users (firstname, lastname, preferred, email, password, dob)
+        VALUES ('$firstname', '$lastname', '$preferred', '$email', '$hashed_password', '$dob')";
 
-        // Redirect to index.php
-        header("Location: index.php");
-        exit();
-    } else {
-        echo "Error: " . $insert_query . "<br>" . $conn->error;
+        if ($conn->query($insert_query) === TRUE) {
+            // Log the user in
+            $_SESSION["loggedin"] = true;
+            $_SESSION["email"] = $email;
+            
+            // Redirect to index.php
+            header("Location: index.php");
+            exit();
+        } else {
+            echo "Error: " . $insert_query . "<br>" . $conn->error;
+        }
     }
 }
 
 $conn->close();
 ?>
+
+
+
 <?php include ('head.php'); ?>
 <body>
 <?php include ('header.php'); ?>
 <?php include ('nav.php'); ?>
     <h2 class="text">Create a Weather Hub Account</h2>
-
-
-    
+    <p id="error-message" style="color: red;"></p>
     <form method = "post" action= '' id="signup" onsubmit="return validateForm()">
         <div>
             <p>Required Information</p>
@@ -164,81 +183,79 @@ $conn->close();
             You also give your consent to recieving email updates and newsletters from WeatherHub as we do not wish to take your money.</p>
     </form>
     
+    
+    <?php include ('footer.php'); ?>
     <script>
-        // Get the radio button and text input elements
-        var referredBy = document.getElementById("other"); // Multiple choice style selection
-        var referredByOther = document.getElementById("other-input"); // Text based answer
-    
-        function showLastChar(inputElem) {
-            const newPassword = inputElem.value.split('');
-            if (inputElem.dataset.displayedCharTimeout) {
-                clearTimeout(inputElem.dataset.displayedCharTimeout);
-            }
+    // Get the radio button and text input elements
+    var referredBy = document.getElementById("other"); // Multiple choice style selection
+    var referredByOther = document.getElementById("other-input"); // Text based answer
 
-            if (newPassword.length > 0) {
-                inputElem.type = 'text';
-                inputElem.value = newPassword.map((char, index) => (index === newPassword.length - 1 ? char : '•')).join('');
+    function showLastChar(inputElem) {
+        const newPassword = inputElem.value.split('');
+        if (inputElem.dataset.displayedCharTimeout) {
+            clearTimeout(inputElem.dataset.displayedCharTimeout);
+        }
 
-                inputElem.dataset.displayedCharTimeout = setTimeout(() => {
-                    inputElem.type = 'password';
-                    inputElem.value = newPassword.join('');
-                }, 1000);
-            }
-        }          
-        
-        // Set the referredByOther input to be hidden by default
-        referredByOther.style.display = "none";
-    
-        // Add an event listener to the radio button group
-        referredBy.addEventListener("change", function() 
+        if (newPassword.length > 0) {
+            inputElem.type = 'text';
+            inputElem.value = newPassword.map((char, index) => (index === newPassword.length - 1 ? char : '•')).join('');
+
+            inputElem.dataset.displayedCharTimeout = setTimeout(() => {
+                inputElem.type = 'password';
+                inputElem.value = newPassword.join('');
+            }, 1000);
+        }
+    }          
+
+    // Set the referredByOther input to be hidden by default
+    referredByOther.style.display = "none";
+
+    // Add an event listener to the radio button group
+    referredBy.addEventListener("change", function() 
+    {
+        // If the "Other" option is selected, show the text input
+        if (referredBy.checked) 
         {
-            // If the "Other" option is selected, show the text input
-            if (referredBy.checked) 
-            {
-                referredByOther.style.display = "block"; // Show text box when other is checked
-            } 
-            else 
-            {
-                referredByOther.style.display = "none"; // Hide the text box if other is not checked
-                referredByOther.value = ""; // clear the input field when not required
+            referredByOther.style.display = "block"; // Show text box when other is checked
+        } 
+        else 
+        {
+            referredByOther.style.display = "none"; // Hide the text box if other is not checked
+            referredByOther.value = ""; // clear the input field when not required
+        }
+    });
+
+    document.getElementById("signup").addEventListener("submit", function(event) {
+        var inputsToCheck = ["fname", "lname", "pname", "email", "password1", "password2"];
+        var valid = true;
+        var errorMessageElement = document.getElementById("error-message");
+        errorMessageElement.innerText = "";
+
+        for (var i = 0; i < inputsToCheck.length; i++) {
+            var input = document.getElementById(inputsToCheck[i]);
+            if (input.value.trim() === "") {
+                errorMessageElement.innerText = "Please fill in all fields.";
+                input.focus();
+                valid = false;
+                break;
             }
-        });
+        }
 
-        function validateForm() {
-            var form = document.getElementById("signup");
-            var inputsToCheck = ["username", "email", "password1", "password2"]; // List the input field IDs you want to validate
-            var valid = true;
+        if (valid) {
+            var password1 = document.getElementById("password1");
+            var password2 = document.getElementById("password2");
 
-            for (var i = 0; i < inputsToCheck.length; i++) {
-                var input = document.getElementById(inputsToCheck[i]);
-                if (input.value.trim() == "") {
-                    alert("Please fill out all required fields.");
-                    valid = false;
-                    break;
-                }
-            }
-
-            var password1 = document.getElementById("password1").value;
-            var password2 = document.getElementById("password2").value;
-
-            if (valid && password1 !== password2) {
-                alert("Passwords do not match.");
+            if (password1.value !== password2.value) {
+                errorMessageElement.innerText = "Passwords do not match.";
+                password1.focus();
                 valid = false;
             }
-
-             // Check if the email is valid
-            var email = document.getElementById("email").value;
-            var emailValidation = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-            if (!emailValidation.test(email)) {
-                alert("Please enter a valid email address.");
-                return false;
-            }
-
-            return valid;
         }
-        
 
+        if (!valid) {
+            event.preventDefault();
+        }
+    });
     </script>
-    <?php include ('footer.php'); ?>
 </body>
 </html>
