@@ -23,8 +23,6 @@ if (isset($_POST['logout']))
 
     <section id="loggedIn">
         <?php if (isset($_SESSION['username'])): ?>
-            <h3>Welcome, <?php echo $_SESSION['username']; ?>!</h3>
-
             <form method="post" action="">
                 <input type="submit" name="logout" value="Log out">
             </form> 
@@ -34,7 +32,7 @@ if (isset($_POST['logout']))
             <p>Please <a href="loginpage.php">log in</a> to access your account.</p>
         <?php endif; ?>
 
-    <h1>Your Weather, John.</h1>
+    <h1>Your Weather, <?php echo isset($_SESSION['username']) ? $_SESSION['username'] : "Guest"; ?>.</h1>
 
     <div class="container-wrapper">
       <div class="container">
